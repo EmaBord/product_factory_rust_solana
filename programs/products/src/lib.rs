@@ -27,7 +27,7 @@ pub mod products {
             Ok(())
         }
     
-        pub fn create_product(&mut self, _ctx: Context<Empty>, name:String, owner: Pubkey) -> Result<()>{
+        pub fn create_product(&mut self, _ctx: Context<Empty>, _name:String, _owner: Pubkey) -> Result<()>{
             
             
             if self.products.len() == 10 {
@@ -35,8 +35,8 @@ pub mod products {
             }
 
             let p = Product::new(
-                name,
-                owner,
+                _name,
+                _owner,
             );
 
             self.products.push(p);
@@ -88,14 +88,6 @@ pub mod products {
 #[derive(Accounts)]
 pub struct Empty {}
 
-
-
-#[derive(Accounts)]
-pub struct Auth<'info> {
-    authority: AccountInfo<'info>,
-}
-
-
 #[error]
 pub enum ErrorCode {
     #[msg("MaximumSize!")]
@@ -107,8 +99,6 @@ pub enum ErrorCode {
     #[msg("InvalidDelegate!")]
     InvalidDelegate,
 }
-
-
 
 #[derive(AnchorSerialize, AnchorDeserialize, PartialEq, Default, Clone)]
 pub struct Product{
