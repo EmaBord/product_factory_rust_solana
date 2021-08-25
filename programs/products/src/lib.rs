@@ -27,7 +27,12 @@ pub mod products {
             Ok(())
         }
     
-        pub fn create_product(&mut self, _ctx: Context<Empty>, _name:String, _owner: Pubkey) -> Result<()>{
+        pub fn create_product(
+            &mut self,
+            _ctx: Context<Empty>,
+            _name:String,
+            _owner: Pubkey
+        ) -> Result<()>{
             
             
             if self.products.len() == 10 {
@@ -43,7 +48,14 @@ pub mod products {
             Ok(())
         }
 
-        pub fn delegate_product(&mut self, _ctx: Context<Empty>, _pid:u8, _owner: Pubkey, _delegate_to: Pubkey) -> Result<()>{
+        pub fn delegate_product(
+            &mut self,
+            _ctx: Context<Empty>,
+            _pid:u8,
+            _owner: Pubkey,
+            _delegate_to: Pubkey
+        ) -> Result<()>{
+
             let p = & mut self.products[usize::from(_pid)];
             
             if p.owner != _owner {
@@ -63,7 +75,13 @@ pub mod products {
             Ok(())
         }
 
-        pub fn accept_product(&mut self, _ctx: Context<Empty>, _pid:u8, _delegate_to: Pubkey) -> Result<()>{
+        pub fn accept_product(
+            &mut self,
+            _ctx: Context<Empty>,
+            _pid:u8,
+            _delegate_to: Pubkey
+        ) -> Result<()>{
+
             let  p = & mut self.products[usize::from(_pid)];
 
             let d_t: Option<Pubkey> = Some(_delegate_to);
