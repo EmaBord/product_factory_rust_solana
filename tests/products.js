@@ -21,15 +21,15 @@ describe('products', () => {
     await program.state.rpc.new({});
 
     // Fetch the products struct from the network.
-    const state = await program.state.fetch();
+    let product_factory = await program.state.fetch();
 
-    assert.equal(state.products.length, 10);
+    assert.equal(product_factory.products.length, 10);
 
     await program.state.rpc.init({});
 
-    const state2 = await program.state.fetch();
+    let product_factory2 = await program.state.fetch();
 
-    assert.equal(state2.products.length, 0);
+    assert.equal(product_factory2.products.length, 0);
 
    });
 
@@ -51,12 +51,12 @@ describe('products', () => {
           
       },
     });
-    const state = await program.state.fetch();
+    const product_factory = await program.state.fetch();
     // #endregion accessor
-    assert.equal(state.products.length, 1);
-    assert.equal(state.products[0].name, "test1");
-    assert.equal(state.products[0].status, 0);
-    assert.ok(state.products[0].owner.equals(owner1.publicKey));
+    assert.equal(product_factory.products.length, 1);
+    assert.equal(product_factory.products[0].name, "test1");
+    assert.equal(product_factory.products[0].status, 0);
+    assert.ok(product_factory.products[0].owner.equals(owner1.publicKey));
 
   });
 
@@ -74,13 +74,13 @@ describe('products', () => {
       },
     });
 
-    const state2 = await program.state.fetch();
+    const product_factory = await program.state.fetch();
     
-    assert.equal(state2.products.length, 1);
-    assert.equal(state2.products[0].name, "test1");
-    assert.equal(state2.products[0].status, 1);
-    assert.ok(state2.products[0].owner.equals(owner1.publicKey));
-    assert.ok(state2.products[0].delegateTo.equals(delegateTo.publicKey));
+    assert.equal(product_factory.products.length, 1);
+    assert.equal(product_factory.products[0].name, "test1");
+    assert.equal(product_factory.products[0].status, 1);
+    assert.ok(product_factory.products[0].owner.equals(owner1.publicKey));
+    assert.ok(product_factory.products[0].delegateTo.equals(delegateTo.publicKey));
 
   });
 
@@ -97,13 +97,13 @@ describe('products', () => {
       },
     });
 
-    const state2 = await program.state.fetch();
+    const product_factory = await program.state.fetch();
     
-    assert.equal(state2.products.length, 1);
-    assert.equal(state2.products[0].name, "test1");
-    assert.equal(state2.products[0].status, 0);
-    assert.ok(state2.products[0].owner.equals(delegateTo.publicKey));
-    assert.equal(state2.products[0].delegate_to, undefined);
+    assert.equal(product_factory.products.length, 1);
+    assert.equal(product_factory.products[0].name, "test1");
+    assert.equal(product_factory.products[0].status, 0);
+    assert.ok(product_factory.products[0].owner.equals(delegateTo.publicKey));
+    assert.equal(product_factory.products[0].delegate_to, undefined);
 
   });
 
@@ -123,13 +123,13 @@ describe('products', () => {
       assert.equal(err.toString(), "InvalidStatus!")
     }
 
-    const state = await program.state.fetch();
+    const product_factory = await program.state.fetch();
     
-    assert.equal(state.products.length, 1);
-    assert.equal(state.products[0].name, "test1");
-    assert.equal(state.products[0].status, 0);
-    assert.ok(state.products[0].owner.equals(delegateTo.publicKey));
-    assert.equal(state.products[0].delegate_to, undefined);
+    assert.equal(product_factory.products.length, 1);
+    assert.equal(product_factory.products[0].name, "test1");
+    assert.equal(product_factory.products[0].status, 0);
+    assert.ok(product_factory.products[0].owner.equals(delegateTo.publicKey));
+    assert.equal(product_factory.products[0].delegate_to, undefined);
 
   });
 
