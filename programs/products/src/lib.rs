@@ -5,12 +5,12 @@ pub mod products {
     use super::*;
     
     #[state]
-    pub struct ProductList{
+    pub struct ProductFactory{
         pub products: Vec<Product>,
     }
 
     
-    impl ProductList {
+    impl ProductFactory {
         pub fn new(_ctx: Context<Empty>) -> Result<Self> {
             let mut whitelist = vec![];
             whitelist.resize(10, Product::default());
