@@ -20,7 +20,7 @@ describe('products', () => {
    );
     await program.state.rpc.new({});
 
-    // Fetch the products struct from the network.
+    // Fetch the product factory struct from the network.
     let product_factory = await program.state.fetch();
 
     assert.equal(product_factory.products.length, 10);
